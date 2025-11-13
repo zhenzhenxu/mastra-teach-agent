@@ -1,0 +1,47 @@
+{
+  "name": "tech-mentor-agent",
+  "version": "1.0.0",
+  "description": "智能技术学习导师系统 - 基于 Mastra 框架的 AI Agent，提供个性化学习路径规划和技术问答服务",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node cli.js",
+    "web": "node web/server.js",
+    "quickstart": "node quickstart.js",
+    "demo": "node demo.js",
+    "example:learning-path": "node examples/example-learning-path.js",
+    "example:qa": "node examples/example-qa.js",
+    "example:debug": "node examples/example-debug.js",
+    "example:all": "npm run example:learning-path && npm run example:qa && npm run example:debug",
+    "deploy:cloudflare": "./scripts/deploy-cloudflare.sh",
+    "deploy:vercel": "./scripts/deploy-vercel.sh",
+    "deploy:docker": "./scripts/deploy-docker.sh",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "mastra",
+    "learning",
+    "education",
+    "tech-mentor",
+    "chatbot",
+    "llm",
+    "openai"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@ai-sdk/openai": "^2.0.65",
+    "@mastra/core": "^0.24.0",
+    "@mastra/memory": "^0.15.11",
+    "ai": "^5.0.93",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "readline": "^1.3.0"
+  }
+}

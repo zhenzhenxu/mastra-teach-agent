@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 技术学习导师</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <h1>🎓 技术学习导师</h1>
+            <p class="subtitle">你的私人AI技术顾问，7x24小时在线答疑</p>
+        </header>
+
+        <!-- 功能选择卡片 -->
+        <div class="mode-selector">
+            <button class="mode-btn active" data-mode="qa" onclick="switchMode('qa')">
+                💬 技术问答
+            </button>
+            <button class="mode-btn" data-mode="learning-path" onclick="switchMode('learning-path')">
+                📚 学习路径
+            </button>
+            <button class="mode-btn" data-mode="explain-code" onclick="switchMode('explain-code')">
+                💡 代码解释
+            </button>
+            <button class="mode-btn" data-mode="review-code" onclick="switchMode('review-code')">
+                🔍 代码审查
+            </button>
+            <button class="mode-btn" data-mode="compare" onclick="switchMode('compare')">
+                ⚖️ 概念对比
+            </button>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 技术问答模式 -->
+            <div id="qa-mode" class="mode-content active">
+                <div class="input-section">
+                    <h2>💬 提出你的技术问题</h2>
+                    <textarea id="qa-question" placeholder="例如：React 的 useEffect 和 useLayoutEffect 有什么区别？" rows="3"></textarea>
+                    <div class="input-row">
+                        <select id="qa-level">
+                            <option value="beginner">初级</option>
+                            <option value="intermediate" selected>中级</option>
+                            <option value="advanced">高级</option>
+                        </select>
+                        <button class="btn-primary" onclick="askQuestion()">提问</button>
+                    </div>
+                </div>
+                <div id="qa-result" class="result-section"></div>
+            </div>
+
+            <!-- 学习路径模式 -->
+            <div id="learning-path-mode" class="mode-content">
+                <div class="input-section">
+                    <h2>📚 生成学习路径</h2>
+                    <input id="lp-technology" type="text" placeholder="要学习的技术（如：React, Python, TypeScript）">
+                    <select id="lp-level">
+                        <option value="beginner" selected>初级</option>
+                        <option value="intermediate">中级</option>
+                        <option value="advanced">高级</option>
+                    </select>
+                    <input id="lp-goal" type="text" placeholder="学习目标（可选）">
+                    <input id="lp-time" type="text" placeholder="可投入时间（如：每天2小时）" value="每天1-2小时">
+                    <button class="btn-primary" onclick="generateLearningPath()">生成路径</button>
+                </div>
+                <div id="lp-result" class="result-section"></div>
+            </div>
+
+            <!-- 代码解释模式 -->
+            <div id="explain-code-mode" class="mode-content">
+                <div class="input-section">
+                    <h2>💡 解释代码</h2>
+                    <textarea id="ec-code" placeholder="粘贴你想要理解的代码..." rows="8"></textarea>
+                    <div class="input-row">
+                        <select id="ec-language">
+                            <option value="javascript" selected>JavaScript</option>
+                            <option value="typescript">TypeScript</option>
+                            <option value="python">Python</option>
+                            <option value="java">Java</option>
+                            <option value="go">Go</option>
+                            <option value="rust">Rust</option>
+                        </select>
+                        <button class="btn-primary" onclick="explainCode()">解释代码</button>
+                    </div>
+                </div>
+                <div id="ec-result" class="result-section"></div>
+            </div>
+
+            <!-- 代码审查模式 -->
+            <div id="review-code-mode" class="mode-content">
+                <div class="input-section">
+                    <h2>🔍 代码审查</h2>
+                    <textarea id="rc-code" placeholder="粘贴需要审查的代码..." rows="8"></textarea>
+                    <select id="rc-language">
+                        <option value="javascript" selected>JavaScript</option>
+                        <option value="typescript">TypeScript</option>
+                        <option value="python">Python</option>
+                        <option value="java">Java</option>
+                    </select>
+                    <input id="rc-context" type="text" placeholder="代码用途说明（可选）">
+                    <button class="btn-primary" onclick="reviewCode()">审查代码</button>
+                </div>
+                <div id="rc-result" class="result-section"></div>
+            </div>
+
+            <!-- 概念对比模式 -->
+            <div id="compare-mode" class="mode-content">
+                <div class="input-section">
+                    <h2>⚖️ 概念对比</h2>
+                    <input id="cmp-concept1" type="text" placeholder="概念1（如：Promise）">
+                    <input id="cmp-concept2" type="text" placeholder="概念2（如：async/await）">
+                    <input id="cmp-context" type="text" placeholder="上下文（可选，如：JavaScript异步编程）">
+                    <button class="btn-primary" onclick="compareConcepts()">对比</button>
+                </div>
+                <div id="cmp-result" class="result-section"></div>
+            </div>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>💡 提示：所有对话都会自动保存</p>
+            <p>Powered by Mastra & OpenAI GPT-4</p>
+        </footer>
+    </div>
+
+    <!-- 加载指示器 -->
+    <div id="loading" class="loading hidden">
+        <div class="spinner"></div>
+        <p>AI 正在思考中...</p>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

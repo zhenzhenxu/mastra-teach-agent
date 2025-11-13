@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  tech-mentor:
+    build: .
+    container_name: tech-mentor-agent
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DATA_PATH=/app/data
+      - PORT=3000
+    volumes:
+      - ./src/data:/app/data
+    restart: unless-stopped
+    networks:
+      - tech-mentor-network
+
+networks:
+  tech-mentor-network:
+    driver: bridge

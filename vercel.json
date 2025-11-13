@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "name": "tech-mentor-agent",
+  "builds": [
+    {
+      "src": "web/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "web/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "web/public/$1"
+    }
+  ],
+  "env": {
+    "OPENAI_API_KEY": "@openai_api_key"
+  }
+}

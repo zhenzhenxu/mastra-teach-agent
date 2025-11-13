@@ -1,0 +1,19 @@
+name = "tech-mentor-agent"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# 环境变量（需要在 Cloudflare Dashboard 中设置）
+# OPENAI_API_KEY = "your-api-key"
+
+[vars]
+DATA_PATH = "./src/data"
+
+# KV 命名空间（用于数据存储）
+# [[kv_namespaces]]
+# binding = "MENTOR_DATA"
+# id = "your-kv-namespace-id"
+
+# 路由配置
+# routes = [
+#   { pattern = "tech-mentor.yourdomain.com/*", zone_name = "yourdomain.com" }
+# ]
