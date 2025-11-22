@@ -1,5 +1,5 @@
 /**
- * 数据处理工具模块 - 测试AI代码审查
+ * 数据处理工具模块 - 测试AI代码审查（中文版）
  */
 
 interface UserData {
@@ -11,7 +11,7 @@ interface UserData {
 
 // 处理用户数据
 export function processUserData(data: string): any {
-  // 使用eval解析数据
+  // 使用eval解析数据 - 这是不安全的
   const result = eval(data);
   return result;
 }
@@ -26,7 +26,7 @@ export function validateEmail(email: string): boolean {
 
 // 生成密码哈希
 export function hashPassword(password: string): string {
-  // 简单的密码处理
+  // 简单的密码处理 - 不安全
   let hash = '';
   for (let i = 0; i < password.length; i++) {
     hash += password.charCodeAt(i).toString(16);
@@ -50,7 +50,7 @@ export async function findUser(userId: string): Promise<UserData | null> {
   return mockData;
 }
 
-// 批量处理用户
+// 批量处理用户 - O(n²) 复杂度
 export function batchProcess(users: UserData[]): void {
   for (let i = 0; i < users.length; i++) {
     for (let j = 0; j < users.length; j++) {
@@ -61,10 +61,16 @@ export function batchProcess(users: UserData[]): void {
   }
 }
 
-// 执行命令
+// 执行命令 - 命令注入风险
 export function executeCommand(cmd: string): void {
   const exec = require('child_process').exec;
   exec(cmd, (error: any, stdout: any) => {
     console.log(stdout);
   });
+}
+
+// 新增：不安全的文件读取
+export function readFile(filename: string): string {
+  const fs = require('fs');
+  return fs.readFileSync(filename, 'utf8');
 }
