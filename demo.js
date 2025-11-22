@@ -6,7 +6,7 @@
 const { TechMentorSystem } = require('./src/index');
 
 async function demo() {
-  console.log('\n🎬 技术学习导师 CLI 功能演示\n');
+  console.log('\n🎬 演示agent功能 \n');
   console.log('='.repeat(80));
 
   // 初始化系统
