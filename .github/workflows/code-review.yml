@@ -13,54 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     name: AI Code Review
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
+
+      - name: AI Code Review
+        uses: zhenzhenxu/zhen-ai-codereview@main
         with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          pip install openai PyGithub click python-dotenv rich pydantic gitpython
-
-      - name: Clone AI Review Tool
-        run: |
-          git clone https://github.com/zhenzhenxu/zhen-ai-codereview.git /tmp/zhen-ai-codereview
-
-      - name: Run AI Code Review
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cd /tmp/zhen-ai-codereview
-          PYTHONPATH=src python3 -c "
-          import os
-          import json
-
-          from zhen_ai_codereview.config import load_config
-          from zhen_ai_codereview.agent import CodeReviewAgent
-
-          # Get PR info
-          event_path = os.environ.get('GITHUB_EVENT_PATH', '')
-          with open(event_path) as f:
-              event = json.load(f)
-
-          pr_number = event['pull_request']['number']
-          repo = os.environ.get('GITHUB_REPOSITORY', '')
-
-          print(f'Reviewing PR #{pr_number} in {repo}')
-
-          config = load_config()
-          agent = CodeReviewAgent(config)
-
-          report = agent.review_pr(repo, pr_number, post_comment=True)
-          print(f'Reviewed {report.reviewed_files}/{report.total_files} files')
-
-          if report.summary:
-              print('\\n--- Summary ---')
-              print(report.summary)
-          "
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          language: 'zh'
